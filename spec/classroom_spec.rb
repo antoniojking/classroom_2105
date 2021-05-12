@@ -27,7 +27,7 @@ describe Classroom do
   # Iteration 2
 
   context 'Students' do
-    xit 'returns a list of students' do
+    it 'returns a list of students' do
       classroom = Classroom.new('History', 4)
       classroom.add_student('Mike')
       classroom.add_student('Megan')
@@ -36,13 +36,38 @@ describe Classroom do
       expect(classroom.students).to eq ['Mike', 'Megan', 'Bob']
     end
 
-    xit 'returns a list of uppercased names' do
+    it 'returns a list of uppercased names' do
       classroom = Classroom.new('History', 4)
       classroom.add_student('Mike')
       classroom.add_student('Megan')
       classroom.add_student('Bob')
 
       expect(classroom.yell_at_students).to eq ['MIKE', 'MEGAN', 'BOB']
+    end
+
+    it 'is the class full' do
+      classroom = Classroom.new('History', 4)
+      classroom.add_student('Mike')
+      classroom.add_student('Megan')
+      classroom.add_student('Bob')
+      classroom.add_student('Eve')
+      classroom.add_student('Alice')
+
+      expect(classroom.over_capacity?). to eq (true)
+    end
+
+    it 'remove a student from the list' do
+      classroom = Classroom.new('History', 4)
+      classroom.add_student('Mike')
+      classroom.add_student('Megan')
+      classroom.add_student('Bob')
+      classroom.add_student('James')
+      classroom.add_student('Cat')
+      classroom.add_student('Alice')
+      classroom.kick_out('Mike')
+      classroom.kick_out('Megan')
+
+      expect(classroom.students).to eq ['Bob', 'James', 'Cat', 'Alice']
     end
   end
 end
